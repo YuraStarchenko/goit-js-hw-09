@@ -4,12 +4,10 @@
 // Натисканням на кнопку «Stop» зміна кольору фону повинна зупинятися.
 
 //Для генерування випадкового кольору використовуй функцію getRandomHexColor.
+// =========================================================================== //
 
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
-
-const BACKGROUND_CHANGE = 1000;
+const DELAY_CHANGE_COLOR = 1000;
+let timeoutId = null;
 
 const refs = {
 	startBtn: document.querySelector('button[data-start]'),
@@ -17,5 +15,18 @@ const refs = {
 	body: document.querySelector('body'),
 };
 
-refs.startBtn.addEventListener('click', onClickStartBtn);
-refs.stopBtn.addEventListener('click', onClickStopBtn);
+refs.startBtn.addEventListener('click', onClickStartColorChengeBtn);
+refs.stopBtn.addEventListener('click', onClickStopColorChengeBtn);
+
+
+function onClickStartColorChengeBtn(){
+	timeoutId = setTimeout(() => {
+		refs.body.style.backgroundColor = getRandomHexColor();
+	}, DELAY_CHANGE_COLOR);
+}
+
+function onClickStopColorChengeBtn(){}
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
