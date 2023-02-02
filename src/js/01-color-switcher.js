@@ -15,16 +15,21 @@ const refs = {
 	body: document.querySelector('body'),
 };
 
+refs.stopBtn.disabled = true;
+
 refs.startBtn.addEventListener('click', () => {
+	refs.startBtn.disabled = true;
+	refs.stopBtn.disabled = false;
+
 	timerId = setInterval(() => {
 		refs.body.style.backgroundColor = getRandomHexColor();
 	}, DELAY_CHANGE_COLOR);
-	refs.startBtn.disabled = false;
 });
 
 refs.stopBtn.addEventListener('click', () => {
-	clearInterval(timerId);
+	refs.startBtn.disabled = false;
 	refs.stopBtn.disabled = true;
+	clearInterval(timerId);
 });
 
 function getRandomHexColor() {
