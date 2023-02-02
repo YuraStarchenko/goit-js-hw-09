@@ -7,7 +7,7 @@
 // =========================================================================== //
 
 const DELAY_CHANGE_COLOR = 1000;
-let timeoutId = null;
+let timerId = null;
 
 const refs = {
 	startBtn: document.querySelector('button[data-start]'),
@@ -15,17 +15,15 @@ const refs = {
 	body: document.querySelector('body'),
 };
 
-refs.startBtn.addEventListener('click', onClickStartColorChengeBtn);
-refs.stopBtn.addEventListener('click', onClickStopColorChengeBtn);
-
-
-function onClickStartColorChengeBtn(){
-	timeoutId = setTimeout(() => {
+refs.startBtn.addEventListener('click', () => {
+	timerId = setInterval(() => {
 		refs.body.style.backgroundColor = getRandomHexColor();
 	}, DELAY_CHANGE_COLOR);
-}
+});
 
-function onClickStopColorChengeBtn(){}
+refs.stopBtn.addEventListener('click', () => {
+	clearInterval(timerId);
+});
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
