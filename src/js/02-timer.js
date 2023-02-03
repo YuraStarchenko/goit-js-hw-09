@@ -1,35 +1,28 @@
-// Описаний в документації
 import flatpickr from "flatpickr";
-// Додатковий імпорт стилів
-// import Notiflix from 'notiflix';
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
 
 const refs = {
-	inputPicker: document.querySelector('input#datetime-picker'),
-	buttonStart: document.querySelector('[data-start]'),
-	timer: document.querySelector('.timer'),
-	valueSecond: document.querySelector('[data-seconds]'),
-	valueMinute: document.querySelector('[data-minutes]'),
-	valueHour: document.querySelector('[data-hours]'),
-	valueDays: document.querySelector('[data-days]'),
+	myInput: document.getElementById('datetime-picker'),
+	startBtn: document.querySelector('button[data-start]'),
+	seconds: document.querySelector('[data-seconds]'),
+	minutes: document.querySelector('[data-minutes]'),
+	hours: document.querySelector('[data-hours]'),
+	days: document.querySelector('[data-days]'),
 };
 
+console.log(new Date());
 
 
-
-
-
-
-
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
-};
+	const options = {
+		enableTime: true,
+		time_24hr: true,
+		defaultDate: new Date(),
+		minuteIncrement: 1,
+		onClose(selectedDates) {
+			console.log(selectedDates[0]);
+		},
+	};
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -46,7 +39,6 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
   return { days, hours, minutes, seconds };
 }
 
