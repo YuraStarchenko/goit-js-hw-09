@@ -16,7 +16,7 @@ img {
   display: block;
   max-width: 100%;
 }
-
+/* ===== Color switcher =====*/
 .change-btn {
 	text-align: center;
 	min-width: 500px;
@@ -72,3 +72,16 @@ img {
 	color: rgb(83, 63, 63);
 	cursor: not-allowed;
 }
+
+/* ===== Countdown timer =====*/
+
+.timer {
+}
+.field {
+}
+.value {
+}
+.label {
+}
+
+/* ===== Promise generator =====*/

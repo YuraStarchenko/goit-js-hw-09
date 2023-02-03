@@ -1,7 +1,25 @@
 // Описаний в документації
 import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
+// import Notiflix from 'notiflix';
 import "flatpickr/dist/flatpickr.min.css";
+
+const refs = {
+	inputPicker: document.querySelector('input#datetime-picker'),
+	buttonStart: document.querySelector('[data-start]'),
+	timer: document.querySelector('.timer'),
+	valueSecond: document.querySelector('[data-seconds]'),
+	valueMinute: document.querySelector('[data-minutes]'),
+	valueHour: document.querySelector('[data-hours]'),
+	valueDays: document.querySelector('[data-days]'),
+};
+
+
+
+
+
+
+
 
 const options = {
   enableTime: true,
