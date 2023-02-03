@@ -2,8 +2,11 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
+const UPDATE_TIME = 1000;
+let myInput = null;
+
 const refs = {
-	myInput: document.getElementById('datetime-picker'),
+	myInput: document.querySelector('input#datetime-picker'),
 	startBtn: document.querySelector('button[data-start]'),
 	seconds: document.querySelector('[data-seconds]'),
 	minutes: document.querySelector('[data-minutes]'),
@@ -11,18 +14,33 @@ const refs = {
 	days: document.querySelector('[data-days]'),
 };
 
+refs.startBtn.disabled = true;
+
+refs.startBtn.addEventListener('click', () => {
+	// refs.startBtn.disabled = true;
+	timerId = setInterval(() => {
+	}, UPDATE_TIME);
+});
+
+
 console.log(new Date());
 
+	const inputPickr = flatpickr('input[type="text"]', 
+		(options = {
+			enableTime: true,
+			time_24hr: true,
+			defaultDate: new Date(),
+			minuteIncrement: 1,
 
-	const options = {
-		enableTime: true,
-		time_24hr: true,
-		defaultDate: new Date(),
-		minuteIncrement: 1,
-		onClose(selectedDates) {
-			console.log(selectedDates[0]);
-		},
-	};
+			onClose(selectedDates) {
+				if(selectedDates[0] < new Date()){
+					alert("Please choose a date in the future");
+				} else {
+					refs.startBtn.disabled = false;
+				}
+			},
+		}),
+	);
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
