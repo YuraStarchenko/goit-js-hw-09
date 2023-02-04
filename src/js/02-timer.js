@@ -42,7 +42,7 @@ refs.startBtn.addEventListener('click', () => {
 
 			intervalId = setInterval(() => {
 				const currentTime = Date.now();
-				const deltaTine = startTime - currentTime;
+				const deltaTine = currentTime - startTime;
 				const timeClock = convertMs(deltaTine);
 				updateClockface(timeClock);
 			}, UPDATE_TIME);
