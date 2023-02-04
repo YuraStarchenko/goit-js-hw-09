@@ -3,7 +3,6 @@ import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
 const UPDATE_TIME = 1000;
-let intervalId = null;
 
 const refs = {
 	myInput: document.querySelector('input#datetime-picker'),
@@ -14,6 +13,9 @@ const refs = {
 	hoursRef: document.querySelector('[data-hours]'),
 	daysRef: document.querySelector('[data-days]'),
 };
+
+let intervalId = null;
+let selectedDates = 0;
 
 refs.startBtn.disabled = true;
 refs.stopBtn.disabled = true;
@@ -39,16 +41,14 @@ refs.startBtn.addEventListener('click', () => {
 	refs.stopBtn.disabled = false;
 	const timer = {
 		start() {
-			const startTime =	Date.now();
-
 			intervalId = setInterval(() => {
-				const currentTime = Date.now();
-				const deltaTine = currentTime - startTime;
-				const timeClock = convertMs(deltaTine);
+				let currentTime = Date.now();
+				let deltaTime = selectedDates - currentTime;
+				let timeClock = convertMs(deltaTime);
 				updateClockface(timeClock);
-			}, UPDATE_TIME);
-		},
-	};
+		}, UPDATE_TIME);
+	},
+};
 	timer.start();
 });
 
@@ -84,10 +84,6 @@ function convertMs(ms) {
   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
   const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
-	updateClockface({ days, hours, minutes, seconds });
+
   return { days, hours, minutes, seconds };
 }
-
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
