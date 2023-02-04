@@ -41,7 +41,7 @@ refs.startBtn.addEventListener('click', () => {
 			const startTime =	Date.now();
 
 			intervalId = setInterval(() => {
-				const currentTime = Date.now().getTime();
+				const currentTime = Date.now();
 				const deltaTine = startTime - currentTime;
 				const timeClock = convertMs(deltaTine);
 				updateClockface(timeClock);
@@ -50,7 +50,6 @@ refs.startBtn.addEventListener('click', () => {
 	};
 	timer.start();
 });
-
 
 refs.stopBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = false;
