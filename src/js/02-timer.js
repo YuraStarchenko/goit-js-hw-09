@@ -3,24 +3,19 @@ import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
 const UPDATE_TIME = 1000;
-let timerId = null;
+let intervalId = null;
 
 const refs = {
 	myInput: document.querySelector('input#datetime-picker'),
 	startBtn: document.querySelector('button[data-start]'),
 	stopBtn: document.querySelector('button[data-start]'),
-	timerClock: document.querySelector('.timer'),
-	seconds: document.querySelector('[data-seconds]'),
-	minutes: document.querySelector('[data-minutes]'),
-	hours: document.querySelector('[data-hours]'),
-	days: document.querySelector('[data-days]'),
+	secondsRef: document.querySelector('[data-seconds]'),
+	minutesRef: document.querySelector('[data-minutes]'),
+	hoursRef: document.querySelector('[data-hours]'),
+	daysRef: document.querySelector('[data-days]'),
 };
 
 refs.startBtn.disabled = true;
-
-
-
-// console.log(new Date());
 
 const options = {
 	enableTime: true,
@@ -38,24 +33,15 @@ const options = {
 };
 flatpickr(refs.myInput, options);
 
-class timer {
-	constructor() {
-		
-	}
-}
-
-
-
 refs.startBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = true;
-	refs.stopBtn.disabled = false;
 	const timer = {
 		start() {
 			const startTime =	Date.now();
 
-		const	timerId = setInterval(() => {
-				const currentTime = Date.now();
-				const deltaTine = currentTime - startTime;
+			intervalId = setInterval(() => {
+				const currentTime = myInput.selectedDates[0] - Date.now();
+				const deltaTine = startTime - currentTime;
 				const timeClock = convertMs(deltaTine);
 				updateClockface(timeClock);
 			}, UPDATE_TIME);
@@ -64,24 +50,23 @@ refs.startBtn.addEventListener('click', () => {
 	timer.start();
 });
 
+
 refs.stopBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = false;
 	refs.stopBtn.disabled = true;
-	clearInterval(timerId);
+	clearInterval(intervalId);
 });
+
+function updateClockface({ days, hours, minutes, seconds }){
+	refs.daysRef.textContent = days;
+	refs.hoursRef.textContent = hours;
+	refs.minutesRef.textContent = minutes;
+	refs.secondsRef.textContent = seconds;
+}
 
 function addLeadingZero(value) {
 	return String(value).padStart(2, '0');
 }
-
-function updateClockface({days, hours, minutes, seconds}){
-	refs.timerClock.textContent = `${days}:${hours}:${minutes}:${seconds}`;
-}
-
-// refs.days.textContent = days;
-// refs.hours.textContent = hours;
-// refs.minutes.textContent = minutes;
-// refs.seconds.textContent = seconds;
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -98,6 +83,7 @@ function convertMs(ms) {
   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
   const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
+	updateClockface({ days, hours, minutes, seconds });
   return { days, hours, minutes, seconds };
 }
 
