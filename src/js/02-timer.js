@@ -8,7 +8,7 @@ let intervalId = null;
 const refs = {
 	myInput: document.querySelector('input#datetime-picker'),
 	startBtn: document.querySelector('button[data-start]'),
-	stopBtn: document.querySelector('button[data-start]'),
+	stopBtn: document.querySelector('button[data-stop]'),
 	secondsRef: document.querySelector('[data-seconds]'),
 	minutesRef: document.querySelector('[data-minutes]'),
 	hoursRef: document.querySelector('[data-hours]'),
@@ -35,6 +35,7 @@ flatpickr(refs.myInput, options);
 
 refs.startBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = true;
+	refs.stopBtn.disabled = false;
 	const timer = {
 		start() {
 			const startTime =	Date.now();
