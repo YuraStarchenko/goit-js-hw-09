@@ -16,6 +16,7 @@ const refs = {
 };
 
 refs.startBtn.disabled = true;
+refs.stopBtn.disabled = true;
 
 const options = {
 	enableTime: true,
