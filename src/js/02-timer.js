@@ -41,7 +41,7 @@ refs.startBtn.addEventListener('click', () => {
 			const startTime =	Date.now();
 
 			intervalId = setInterval(() => {
-				const currentTime = myInput.selectedDates[0] - Date.now();
+				const currentTime = Date.now().getTime();
 				const deltaTine = startTime - currentTime;
 				const timeClock = convertMs(deltaTine);
 				updateClockface(timeClock);
