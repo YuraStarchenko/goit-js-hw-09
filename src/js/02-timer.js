@@ -30,11 +30,11 @@ const options = {
 		if(selectedDates[0] - currentTime > 0){
 			refs.startBtn.disabled = false;
 		} else {
-			Notiflix.Report.warning("Please choose a date in the future");
+			Notiflix.Report.failure("У нас есть что было.🤣");
 		}
 	},
 };
-
+	
 
 const flatP = flatpickr(refs.myInput, options);
 
