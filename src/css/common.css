@@ -80,7 +80,7 @@ img {
 .timer {
 	text-align: center;
 	padding-top: 250px;
-	width: 50%;
+	max-width: 500px;
 	margin: 0 auto;
 }
 .calendar{
