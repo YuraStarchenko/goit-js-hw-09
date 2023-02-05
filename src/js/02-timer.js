@@ -30,7 +30,7 @@ const options = {
 		if(selectedDates[0] - currentTime > 0){
 			refs.startBtn.disabled = false;
 		} else {
-			Notiflix.Report.failure("У нас есть что было.🤣");
+			Notiflix.Report.failure("У нас есть что было -> В.Кличко🤣");
 		}
 	},
 };
