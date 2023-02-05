@@ -3,6 +3,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
 const UPDATE_TIME = 1000;
+let intervalId = null;
 
 const refs = {
 	myInput: document.querySelector('input#datetime-picker'),
@@ -14,9 +15,6 @@ const refs = {
 	daysRef: document.querySelector('[data-days]'),
 };
 
-let intervalId = null;
-let selectedDates = 0;
-
 refs.startBtn.disabled = true;
 refs.stopBtn.disabled = true;
 
@@ -27,29 +25,29 @@ const options = {
 	minuteIncrement: 1,
 
 	onClose(selectedDates) {
-		if(selectedDates[0] < new Date()){
-			Notiflix.Report.warning("Please choose a date in the future");
-		} else {
+		const currentTime = new Date();
+
+		if(selectedDates[0] - currentTime > 0){
 			refs.startBtn.disabled = false;
+		} else {
+			Notiflix.Report.warning("Please choose a date in the future");
 		}
 	},
 };
-flatpickr(refs.myInput, options);
+
+
+const flatP = flatpickr(refs.myInput, options);
 
 refs.startBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = true;
 	refs.stopBtn.disabled = false;
-	const timer = {
-		start() {
-			intervalId = setInterval(() => {
-				let currentTime = Date.now();
-				let deltaTime = selectedDates - currentTime;
-				let timeClock = convertMs(deltaTime);
-				updateClockface(timeClock);
-		}, UPDATE_TIME);
-	},
-};
-	timer.start();
+
+	intervalId = setInterval(() => {
+		const selectedDate = flatP.selectedDates[0];
+		const startTime = new Date();
+		const countDown = selectedDate - startTime;
+		updateClockface(convertMs(countDown));
+	}, UPDATE_TIME);
 });
 
 refs.stopBtn.addEventListener('click', () => {
@@ -59,10 +57,10 @@ refs.stopBtn.addEventListener('click', () => {
 });
 
 function updateClockface({ days, hours, minutes, seconds }){
-	refs.daysRef.textContent = days;
-	refs.hoursRef.textContent = hours;
-	refs.minutesRef.textContent = minutes;
-	refs.secondsRef.textContent = seconds;
+	refs.daysRef.textContent = addLeadingZero(days);
+	refs.hoursRef.textContent = addLeadingZero(hours);
+	refs.minutesRef.textContent = addLeadingZero(minutes);
+	refs.secondsRef.textContent = addLeadingZero(seconds);
 }
 
 function addLeadingZero(value) {
