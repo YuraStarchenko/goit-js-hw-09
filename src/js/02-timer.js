@@ -58,10 +58,10 @@ refs.resetBtn.addEventListener('click', () => {
 });
 
 function clearBtn(){
-	second = 0; 
-	minute = 0;
-	hour = 0;
-	day = 0;
+	// second = 0; 
+	// minute = 0;
+	// hour = 0;
+	// day = 0;
 	refs.daysRef.textContent = "00";
 	refs.hoursRef.textContent = "00";
 	refs.minutesRef.textContent = "00";
