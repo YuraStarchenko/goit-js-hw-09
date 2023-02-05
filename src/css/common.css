@@ -76,12 +76,15 @@ img {
 /* ===== Countdown timer =====*/
 
 .timer {
+	align-items: center;
 }
 .field {
+
 }
 .value {
 }
 .label {
 }
+
 
 /* ===== Promise generator =====*/

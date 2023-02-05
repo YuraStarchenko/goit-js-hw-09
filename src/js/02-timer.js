@@ -8,7 +8,7 @@ let intervalId = null;
 const refs = {
 	myInput: document.querySelector('input#datetime-picker'),
 	startBtn: document.querySelector('button[data-start]'),
-	stopBtn: document.querySelector('button[data-stop]'),
+	resetBtn: document.querySelector('button[data-stop]'),
 	secondsRef: document.querySelector('[data-seconds]'),
 	minutesRef: document.querySelector('[data-minutes]'),
 	hoursRef: document.querySelector('[data-hours]'),
@@ -16,7 +16,7 @@ const refs = {
 };
 
 refs.startBtn.disabled = true;
-refs.stopBtn.disabled = true;
+refs.resetBtn.disabled = true;
 
 const options = {
 	enableTime: true,
@@ -40,7 +40,7 @@ const flatP = flatpickr(refs.myInput, options);
 
 refs.startBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = true;
-	refs.stopBtn.disabled = false;
+	refs.resetBtn.disabled = false;
 
 	intervalId = setInterval(() => {
 		const selectedDate = flatP.selectedDates[0];
@@ -50,11 +50,23 @@ refs.startBtn.addEventListener('click', () => {
 	}, UPDATE_TIME);
 });
 
-refs.stopBtn.addEventListener('click', () => {
+refs.resetBtn.addEventListener('click', () => {
 	refs.startBtn.disabled = false;
-	refs.stopBtn.disabled = true;
+	refs.resetBtn.disabled = true;
 	clearInterval(intervalId);
+	clearBtn();
 });
+
+function clearBtn(){
+	second = 0; 
+	minute = 0;
+	hour = 0;
+	day = 0;
+	refs.daysRef.textContent = "00";
+	refs.hoursRef.textContent = "00";
+	refs.minutesRef.textContent = "00";
+	refs.secondsRef.textContent = "00";
+}
 
 function updateClockface({ days, hours, minutes, seconds }){
 	refs.daysRef.textContent = addLeadingZero(days);
