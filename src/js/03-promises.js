@@ -19,11 +19,15 @@ function createPromise(position, delay) {
 				reject({position, delay});
 			}
 		}, delay);
-	})
+	});
 }
 
-function promiseCreateBtn(){
+function promiseCreateBtn(e){
+	e.preventDefault();
 
+	for(let position = 1; position <= amount; position += 1){
+
+	}
 
 	createPromise(2, 1500)
   .then(({ position, delay }) => {
