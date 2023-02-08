@@ -1,2 +1,0 @@
-(document.querySelector("form.form"),document.querySelector('[name="delay"]'),document.querySelector('[name="step"]'),document.querySelector('[name="amount"]'),document.querySelector('[type="submit"]')).addEventListener("click",(function(){})),(void Math.random()).then((function(e){var o=e.position,n=e.delay;console.log("✅ Fulfilled promise ".concat(o," in ").concat(n,"ms"))})).catch((function(e){var o=e.position,n=e.delay;console.log("❌ Rejected promise ".concat(o," in ").concat(n,"ms"))}));
-//# sourceMappingURL=03-promises.aaf962da.js.map
