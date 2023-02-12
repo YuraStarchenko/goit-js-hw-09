@@ -47,6 +47,9 @@ refs.startBtn.addEventListener('click', () => {
 		const startTime = new Date();
 		const countDown = selectedDate - startTime;
 		updateClockface(convertMs(countDown));
+		if(countDown < UPDATE_TIME){
+			clearInterval(intervalId);
+		}
 	}, UPDATE_TIME);
 });
 
