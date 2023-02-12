@@ -7,7 +7,7 @@ const refs = {
 	amount: document.querySelector('[name="amount"]'),
 };
 
-refs.form.addEventListener('click', onPromiseCreate);
+refs.form.addEventListener('submit', onPromiseCreate);
 
 
 function createPromise(position, delay) {
@@ -31,7 +31,7 @@ function onPromiseCreate(e){
 	let amount = Number(refs.amount.value);
 
 	for (let i = 1; i <= amount; i += 1){
-		let delayP = firstDelay + step * 1
+		let delayP = firstDelay + step * i;
 
 		createPromise(i, delayP)
 		.then(({ position, delay }) => {
@@ -41,4 +41,5 @@ function onPromiseCreate(e){
 			Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
 		});
 	}
+	e.currentTarget.reset();
 }
